@@ -13,8 +13,11 @@ Here's a look at how the self-contained files in this project are organized unti
 ```
 portfolio/
 ├── readme.md
-├── portfolio-v2-react-live.html
-└── staging/
+├── index.html
+├── 404.html
+└── maintenance
+    └── index.html
+└── build-backups/
     ├── react/
     │   └── index.html
     └── vue/
