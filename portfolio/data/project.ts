@@ -1,3 +1,22 @@
+interface TechNote {
+    title: string;
+    stack: string[];
+}
+
+interface ProjectDetails {
+    images: string[];
+    techNotes: TechNote[];
+}
+
+export interface Project {
+    id: number;
+    title: string;
+    slug: string;
+    description: string;
+    coverImage: string;
+    details: ProjectDetails;
+}
+
 // The main projects array
 export const projects = [
     {
