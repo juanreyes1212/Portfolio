@@ -1,6 +1,9 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import NavLink from "./NavLink";
+import MoonIcon from "./MoonIcon";
+import SunIcon from "./SunIcon";
 
+//TODO: add type checks during prop adding, fix imports, update routing, darkmode check -> theme toggles
 const Header = ({ currentRoute, isDarkMode, toggleTheme }) => (
             <header className="sticky top-0 z-50 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800">
                 <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,4 +1,5 @@
 import React from 'react';
+
 //TODO: add type checks during prop adding, fix imports
 const ProjectDetail = ({ project, onNavigateHome }) => {
             useEffect(() => {
