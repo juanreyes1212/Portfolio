@@ -1,3 +1,4 @@
+// validate that every object in the array conforms to this structure
 interface TechNote {
     title: string;
     stack: string[];
@@ -17,8 +18,21 @@ export interface Project {
     details: ProjectDetails;
 }
 
+// helper function to parse HTML notes from the original data
+// TODO: Check if still needed post first migration
+const parseTechNotes = (noteHtml: string | null | undefined): string[] => {
+    if (!noteHtml) return [];
+    // A simple parser to extract list items from the note's HTML
+    const cleanHtml = noteHtml.replace(/\\n/g, ' ').replace(/<br\s*\/?>/g, ' ');
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = cleanHtml;
+    return Array.from(tempDiv.querySelectorAll('li, p'))
+        .map(el => el.textContent?.trim().replace(/,/g, '') ?? '')
+        .filter(text => text.length > 0);
+};
+
 // The main projects array
-export const projects = [
+export const projects: Project[] = [
     {
         id: 46181298,
         title: "Hownd Merchant web app",
