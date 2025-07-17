@@ -39,7 +39,7 @@ export default function ProjectDetail({ project }) {
                                         alt={`${project.title} screenshot ${index + 1}`}
                                         width={1200}
                                         height={800}
-                                        className="rounded-lg w-full h-auto shadow-lg border border-slate-200 dark:border-slate-700"
+                                        className="rounded-lg w-full h-auto shadow-lg border border-slate-200 dark:border-slate-700 bg-white"
                                     />
                                 </motion.div>
                             ))}

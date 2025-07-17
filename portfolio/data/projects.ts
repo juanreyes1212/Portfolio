@@ -130,7 +130,8 @@ export const projects: Project[] = [
         title: "OptumRX web app",
         slug: "optumrx-web-app",
         description: "Document Proofing Portal (document print job queuer) to simplify complex user flows and emphasize micro-interactions in managing thousands of pending and real-time printing queues for the wider Optum application architecture.",
-        coverImage: "/images/optum.png",
+        coverImage: "/images/optumrx-web-app/83-1-login.png",
+        // coverImage: "/images/optum.png",
         details: {
             images: [
                 "83-1-login.png",
@@ -166,7 +167,8 @@ export const projects: Project[] = [
         title: "Hudson & Marshall web site",
         slug: "hudson-marshall-web-site",
         description: "Real estate property auction company looking to modernize their legacy application while directing a wider audience towards their bidding and purchasing process.",
-        coverImage: "/images/hudson-marshall.png",
+        coverImage: "/images/hudson-marshall-web-site/92-srp-mvp-map-view-v7.png",
+        // coverImage: "/images/hudson-marshall.png",
         details: {
             images: [
                 "91-home.visionary.png",
