@@ -14,6 +14,22 @@ Here's a look at how the self-contained files in this project are organized unti
 portfolio/
 ├── readme.md
 ├── index.html
+└── public/
+    └── images/
+        ├── hownd.png
+        ├── fetchrev.png
+        ├── plansource.png
+        ├── ... (rest of card images)
+        |
+        ├── hownd-merchant-web-app/
+        │   └── (images in details view...)
+        ├── fetchrev-web-app/
+        │   └── (...)
+        ├── plansource-web-app/
+        │   ├── 7p-login.png
+        │   ├── 7o-executive-summary_brief-review.png
+        │   └── ...
+        └── ... (a folder for each project slug)
 ├── 404.html
 └── maintenance
     └── index.html

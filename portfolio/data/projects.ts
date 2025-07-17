@@ -19,7 +19,7 @@ export interface Project {
 }
 
 // helper function to parse HTML notes from the original data
-// TODO: Check if still needed post first migration
+// @TODO: Check if still needed post first migration
 const parseTechNotes = (noteHtml: string | null | undefined): string[] => {
     if (!noteHtml) return [];
     // A simple parser to extract list items from the note's HTML
@@ -40,7 +40,7 @@ export const projects: Project[] = [
         description: "Fetchrev's branding re-haul and product pivot to a no tiered-plan web app with a revamped user experience. Leveraged a modernized tech stack required to expand on Fetchrev's legacy campaign promo offerings paradigm, Hownd's MyHownd consumer mobile app functionality, and continuously evolving data-model needs from new feature-functionalities.",
         coverImage: "/images/hownd.png",
         details: {
-            images: [], // We will add the detail images later
+            images: [], // TODO: We will add the detail images later
             techNotes: [
                 {
                     title: "Front End",
