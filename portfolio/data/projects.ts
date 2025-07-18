@@ -102,7 +102,7 @@ export const projects: Project[] = [
         title: "PlanSource web app",
         slug: "plansource-web-app",
         description: "Insurance brokerage administrative dashboard that bridged the gap between policy performance and reporting for administrators in one place from their existing integrations.",
-        coverImage: "/images/plansource.png",
+        coverImage: "/images/plansource-web-app/7o-executive-summary_brief-review.png",
         details: {
             images: [
                 "7p-login.png",
@@ -130,7 +130,7 @@ export const projects: Project[] = [
         title: "OptumRX web app",
         slug: "optumrx-web-app",
         description: "Document Proofing Portal (document print job queuer) to simplify complex user flows and emphasize micro-interactions in managing thousands of pending and real-time printing queues for the wider Optum application architecture.",
-        coverImage: "/images/optumrx-web-app/83-1-login.png",
+        coverImage: "/images/optumrx-web-app/88-11-eob-active-file-detail-optumrx-pending-approval.png",
         // coverImage: "/images/optum.png",
         details: {
             images: [
@@ -196,7 +196,7 @@ export const projects: Project[] = [
         title: "SmartPort web app",
         slug: "smartport-web-app",
         description: "International port shipment tracking and logistical workflows centered around porter certifications and shipping documentation for more accurate and secure container shipments.",
-        coverImage: "/images/smartport.png",
+        coverImage: "/images/smartport-web-app/8t-port-operators.png",
         details: {
             images: [
                 "8m-registration-step1.png",
@@ -227,7 +227,8 @@ export const projects: Project[] = [
         title: "GCU teacher/student web app",
         slug: "gcu-teacher-student-web-app",
         description: "Student portal document submission and plagiarism checker to reduce hands-on management of student-to-teacher document submissions used for integrity checking, grammar feedback, admin functionality, and user testing.",
-        coverImage: "/images/gcu.png",
+        coverImage: "/images/gcu-teacher-student-web-app/9l-main-student-feedback-expanded.png",
+        // coverImage: "/images/gcu.png",
         details: {
             images: [
                 "9c-upload-page-submitted-table5.png",
@@ -258,7 +259,7 @@ export const projects: Project[] = [
         title: "SanosHealth landing page and mobile app",
         slug: "sanoshealth-app",
         description: "\"On-demand doctor consultation at the palm of your hand when you need it most.\"",
-        coverImage: "/images/sanos.png",
+        coverImage: "/images/sanoshealth-app/7y-mobile.png",
         details: {
             images: [
                 "7x-landing-page.png",
@@ -277,7 +278,7 @@ export const projects: Project[] = [
         title: "JobDocs landing page",
         slug: "jobdocs-landing-page",
         description: "Professional certification tracker and document locker primarily for working professionals in fields that require updated certifications in a neatly organized and easily shareable way.",
-        coverImage: "/images/jobdocs.png",
+        coverImage: "/images/jobdocs-landing-page/80-landingpage-2.png",
         details: {
             images: [
                 "7z-landingpage.png",
@@ -296,7 +297,7 @@ export const projects: Project[] = [
         title: "Kogni Landing Page",
         slug: "kogni-landing-page",
         description: "Landing page for new centralized tooling for data lake/big data analytics and security.",
-        coverImage: "/images/kogni.png",
+        coverImage: "/images/kogni-landing-page/81-kogni-landing-page.png",
         details: {
             images: [
                 "81-kogni-landing-page.png",
@@ -315,7 +316,7 @@ export const projects: Project[] = [
         title: "UHG web app",
         slug: "uhg-web-app",
         description: "Dynamic insurance policy builder for United Health Care Group to begin a phased push towards a more modern UX and tech stack.",
-        coverImage: "/images/uhg.png",
+        coverImage: "/images/uhg-web-app/90-dynamic-book-builder-home.png",
         details: {
             images: [
                 "90-dynamic-book-builder-home.png"
