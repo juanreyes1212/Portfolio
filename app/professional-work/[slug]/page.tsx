@@ -11,7 +11,7 @@ export async function generateStaticParams() {
 }
 
 export default function ProjectPage({ params }: { params: { slug: string } }) {
-    const { slug } = React.use(params); //@TODO:slug  = React.use(params); //@TODO: params should be awaited before using this, come back and iterate
+    const { slug } = params; 
 
     // Find the project data based on the slug from the URL
     const project = projects.find(p => p.slug === slug);
