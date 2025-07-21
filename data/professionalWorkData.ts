@@ -39,7 +39,7 @@ export const professionalWorkData: Project[] = [
         type: "professional-work",
         title: "Hownd Merchant web app",
         slug: "hownd-merchant-web-app",
-        description: "Fetchrev's branding re-haul and product pivot to a no tiered-plan web app with a revamped user experience. Leveraged a modernized tech stack required to expand on Fetchrev's legacy campaign promo offerings paradigm, Hownd's MyHownd consumer mobile app functionality, and continuously evolving data-model needs from new feature-functionalities.",
+        description: "Fetchrev's branding re-haul and product pivot to a no tiered-plan web app with a revamped user experience. Leveraged a modernized Vue tech stack required to expand on Fetchrev's legacy Ember campaign promo offerings paradigm, Hownd's MyHownd consumer mobile app functionality, and continuously evolving data-model needs and event tracking.",
         coverImage: "/images/hownd.png",
         details: {
             images: [], // TODO: We will add the detail images later
@@ -68,7 +68,7 @@ export const professionalWorkData: Project[] = [
         type: "professional-work",
         title: "Fetchrev web app",
         slug: "fetchrev-web-app",
-        description: "Revenue-sharing web app for increasing a Merchant's customer engagement through tiered-plans that offer different levels of \"do-it-for me\" promotional offering campaign editors, email marketing, customer list management, and metrics.",
+        description: "Revenue-sharing web app for increasing a Merchant's customer engagement through tiered-plans that offer different levels of \"do-it-for me\" promotional offering campaign editors, email marketing, customer list management, and metrics. Range of work extended from Salesforce campaign validation to landing page design or product web rollout and integration work into the deals platform for local brands, backend updates, and SQL reporting.",
         coverImage: "/images/fetchrev.png",
         details: {
             images: [],
@@ -89,8 +89,8 @@ export const professionalWorkData: Project[] = [
         type: "professional-work",
         title: "Fetchrev Spotley Wifi web app",
         slug: "fetchrev-spotley-wifi-web-app",
-        description: "Admin app to manage Spotley Wifi login portals, user-facing portal landings, and sign-up offerings to encourage email sign-up.",
-        coverImage: "/images/fetchrev-spotley.png",
+        description: "Admin app to manage Spotley Wifi login portals, user-facing portal landings, and sign-up offerings to encourage email sign-up. Login landing pages to Wifi-connected hotspots at customer locations that offer guest internet.",
+        coverImage: "/images/fetchrev-spotley-wifi-web-app/fetchrev-spotley.png",
         details: {
             images: [],
             techNotes: [

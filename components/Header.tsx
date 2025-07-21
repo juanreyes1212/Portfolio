@@ -1,6 +1,7 @@
 'use client';
 
-import Link from 'next/link'; // Keep Link import
+import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { SunIcon, MoonIcon } from './Icons';
 
@@ -20,7 +21,8 @@ export default function Header({ currentRoute, isDarkMode, toggleTheme }) {
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center">
-                        <Link href="/">
+                        <Link href="/" className="flex items-center">
+                            <Image src="/images/jdrey-logo.png" alt="Logo" width={32} height={32} className="rounded" />
                             <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Juan Reyes</span>
                         </Link>
                     </div>

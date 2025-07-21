@@ -35,6 +35,72 @@ const parseTechNotes = (noteHtml: string | null | undefined): string[] => {
 // The main projects array
 export const personalProjectsData: Project[] = [
     {
+        id: 438599424,
+        type: "personal-projects",
+        title: "PushPup",
+        slug: "pushpup-web-app",
+        description: "This is the pushpup description detail",
+        coverImage: "/images/plansource-web-app/7o-executive-summary_brief-review.png",
+        details: {
+            images: [
+                "7p-login.png",
+                "7o-executive-summary_brief-review.png",
+                "7m-psa.png",
+                "7n-psa-participation.png",
+                "7q-psa-employer-groups.png",
+                "7r-product-performance.png",
+                "7s-participation.png",
+                "7t-renewal-overview.png",
+                "7u-renewal-inprogress.png",
+                "7v-broker.png",
+                "7w-plansource-executive-summary.png"
+            ],
+            techNotes: [
+                {
+                    title: "Methods/Tech Used",
+                    stack: ["Ideation/UX/User Journeys/User Flows/Brand Identity/Testing", "Design", "Figma", "React JS", "Highcharts JS", "Semantic UI"]
+                }
+            ]
+        }
+    },
+    {
+        id: 438601305,
+        type: "personal-projects",
+        title: "Eorzean Compass",
+        slug: "eorzean-compass-web-app",
+        description: "This is the eorzean compass description detail",
+        coverImage: "/images/optumrx-web-app/88-11-eob-active-file-detail-optumrx-pending-approval.png",
+        details: {
+            images: [
+                "83-1-login.png",
+                "84-15-archive-search-result.png",
+                "85-14-archive-landing.png",
+                "86-13-eob-active-file-detail-post-approval.png",
+                "87-12-eob-active-file-detail-filter-type.png",
+                "88-11-eob-active-file-detail-optumrx-pending-approval.png",
+                "89-10-eob-active-file-list.png",
+                "8a-9-tb-active-file-detail.png",
+                "8b-8-tb-active-file-list-date-picker.png",
+                "8c-7-tb-active-file-list.png",
+                "8d-6-active-landing-time-stamp-tooltip.png",
+                "8e-5-active-landing-logout.png",
+                "8f-4-active-landing-viewing-filter.png",
+                "8g-3-active-landing.png",
+                "8h-2-active-landing-company-filter.png",
+                "8i-16-archive-search-result-expanded.png",
+                "8j-17-archive-search-result-detail.png",
+                "8k-18-archive-detail-reprint.png",
+                "8l-styleguide.png"
+            ],
+            techNotes: [
+                {
+                    title: "Methods/Tech Used",
+                    stack: ["UX/Information Architecture/User Flows/Brand Identity", "Design", "Adobe XD", "Zeplin (stakeholder feedback comments and developer specs)", "Invision (clickable protype)", "Balsamiq (ideation-directed mockups)", "React JS", "Semantic UI", "SCSS/Sass"]
+                }
+            ]
+        }
+    },
+    {
         id: 461812981,
         type: "personal-projects",
         title: "AZ Trails Guide",
@@ -97,72 +163,6 @@ export const personalProjectsData: Project[] = [
                 {
                     title: "Front End",
                     stack: ["Vue.js", "Vuex", "Axios", "SCSS"]
-                }
-            ]
-        }
-    },
-    {
-        id: 438599424,
-        type: "personal-projects",
-        title: "PushPup",
-        slug: "pushpup-web-app",
-        description: "This is the pushpup description detail",
-        coverImage: "/images/plansource-web-app/7o-executive-summary_brief-review.png",
-        details: {
-            images: [
-                "7p-login.png",
-                "7o-executive-summary_brief-review.png",
-                "7m-psa.png",
-                "7n-psa-participation.png",
-                "7q-psa-employer-groups.png",
-                "7r-product-performance.png",
-                "7s-participation.png",
-                "7t-renewal-overview.png",
-                "7u-renewal-inprogress.png",
-                "7v-broker.png",
-                "7w-plansource-executive-summary.png"
-            ],
-            techNotes: [
-                {
-                    title: "Methods/Tech Used",
-                    stack: ["Ideation/UX/User Journeys/User Flows/Brand Identity/Testing", "Design", "Figma", "React JS", "Highcharts JS", "Semantic UI"]
-                }
-            ]
-        }
-    },
-    {
-        id: 438601305,
-        type: "personal-projects",
-        title: "Eorzean Compass",
-        slug: "eorzean-compass-web-app",
-        description: "This is the eorzean compass description detail",
-        coverImage: "/images/optumrx-web-app/88-11-eob-active-file-detail-optumrx-pending-approval.png",
-        details: {
-            images: [
-                "83-1-login.png",
-                "84-15-archive-search-result.png",
-                "85-14-archive-landing.png",
-                "86-13-eob-active-file-detail-post-approval.png",
-                "87-12-eob-active-file-detail-filter-type.png",
-                "88-11-eob-active-file-detail-optumrx-pending-approval.png",
-                "89-10-eob-active-file-list.png",
-                "8a-9-tb-active-file-detail.png",
-                "8b-8-tb-active-file-list-date-picker.png",
-                "8c-7-tb-active-file-list.png",
-                "8d-6-active-landing-time-stamp-tooltip.png",
-                "8e-5-active-landing-logout.png",
-                "8f-4-active-landing-viewing-filter.png",
-                "8g-3-active-landing.png",
-                "8h-2-active-landing-company-filter.png",
-                "8i-16-archive-search-result-expanded.png",
-                "8j-17-archive-search-result-detail.png",
-                "8k-18-archive-detail-reprint.png",
-                "8l-styleguide.png"
-            ],
-            techNotes: [
-                {
-                    title: "Methods/Tech Used",
-                    stack: ["UX/Information Architecture/User Flows/Brand Identity", "Design", "Adobe XD", "Zeplin (stakeholder feedback comments and developer specs)", "Invision (clickable protype)", "Balsamiq (ideation-directed mockups)", "React JS", "Semantic UI", "SCSS/Sass"]
                 }
             ]
         }
