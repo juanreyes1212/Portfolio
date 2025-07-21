@@ -12,10 +12,10 @@ export default function ProjectDetail({ project }) {
             transition={{ duration: 0.5, ease: "easeOut" }}
         >
             <div className="mb-8">
-                <Link href="/professional-work">
+                <Link href={`/${project.type}/`}>
                     <span className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline group cursor-pointer">
                         <svg className="w-5 h-5 mr-2 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                        Back to Professional Work
+                        Back
                     </span>
                 </Link>
             </div>

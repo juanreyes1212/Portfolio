@@ -23,8 +23,8 @@ export default function ProjectList({ projectGroups }) {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
             {projectGroups.map(group => (
-                // Use the group.slug for the URL
-                <Link href={`/professional-work/${group.slug}`} key={group.id} passHref>
+                // ex: /professional-work/hownd
+                <Link href={`/${group.type}/${group.slug}`} key={group.id} passHref>
                     <ProjectCard group={group} />
                 </Link>
             ))}

@@ -24,9 +24,10 @@ export default function Header({ currentRoute, isDarkMode, toggleTheme }) {
                             <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Juan Reyes</span>
                         </Link>
                     </div>
-                    <div className="hidden sm:flex items-center space-x-4">
-                        <NavLink href="/" active={pathname === '/'}>Home</NavLink>
-                        <NavLink href="/professional-work" active={pathname.startsWith('/professional-work')}>Professional Work</NavLink>
+                    <div className="hidden sm:flex items-last space-x-4">
+                        {/* <NavLink href="/" active={pathname === '/'}>Home</NavLink> */}
+                        <NavLink href="/professional-work" active={pathname.startsWith('/professional-work')}>Work</NavLink>
+                        <NavLink href="/personal-projects" active={pathname.startsWith('/personal-projects')}>Projects</NavLink>
                     </div>
                     <button onClick={toggleTheme} className="p-2 rounded-full">
                         {isDarkMode ? <SunIcon /> : <MoonIcon />}
