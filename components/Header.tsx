@@ -1,19 +1,26 @@
 'use client';
 
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { SunIcon, MoonIcon } from './Icons';
+import { ModeToggle } from './mode-toggle';
 
-const NavLink = ({ href, active, children }) => (
-    <Link href={href}>
-        <span className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${active ? 'bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'}`}>
-            {children}
-        </span>
-    </Link>
-);
+const NavLink = ({ href, active, children }: { href: string; active: boolean; children: React.ReactNode }) => (
+  <Link
+    href={href}
+    className={cn(
+      'px-3 py-2 rounded-md text-sm font-medium transition-colors',
+      active
+        ? 'bg-accent text-accent-foreground'
+        : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+    )}
+  >
+    {children}
+  </Link>
+); 
 
-export default function Header({ currentRoute, isDarkMode, toggleTheme }) {
+export default function Header() {
     const pathname = usePathname();
 
     return (
@@ -22,18 +29,15 @@ export default function Header({ currentRoute, isDarkMode, toggleTheme }) {
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center">
                         <Link href="/" className="flex items-center">
-                            <Image src="/images/jdrey-logo.png" alt="Logo" width={32} height={32} className="rounded" />
-                            <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Juan Reyes</span>
+                            <Image src="/images/jdrey-logo.png" alt="Logo" width={32} height={32} className="rounded mr-3" />
+                            <span className="text-xl font-bold tracking-tight text-foreground">Juan Reyes</span>
                         </Link>
                     </div>
                     <div className="hidden sm:flex items-last space-x-4">
-                        {/* <NavLink href="/" active={pathname === '/'}>Home</NavLink> */}
                         <NavLink href="/professional-work" active={pathname.startsWith('/professional-work')}>Work</NavLink>
                         <NavLink href="/personal-projects" active={pathname.startsWith('/personal-projects')}>Projects</NavLink>
+                        <ModeToggle />
                     </div>
-                    <button onClick={toggleTheme} className="p-2 rounded-full">
-                        {isDarkMode ? <SunIcon /> : <MoonIcon />}
-                    </button>
                 </div>
             </nav>
         </header>
