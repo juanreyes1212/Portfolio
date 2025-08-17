@@ -1,6 +1,7 @@
 import Image from 'next/image';
+import { Project } from '@/data/personalProjectsData'; // Assuming Project interface is consistent
 
-export default function ProjectCard({ group }) {
+export default function ProjectCard({ group }: { group: Project }) {
     return (
         <div className="bg-white dark:bg-slate-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 h-full">
             <div className="relative h-56 w-full">

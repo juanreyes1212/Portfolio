@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { ModeToggle } from './mode-toggle';
+import { ModeToggle } from './ModeToggle'; // Corrected casing for consistency
 
 const NavLink = ({ href, active, children }: { href: string; active: boolean; children: React.ReactNode }) => (
   <Link

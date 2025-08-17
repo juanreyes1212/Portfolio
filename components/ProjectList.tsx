@@ -3,8 +3,9 @@
 import Link from 'next/link';
 import ProjectCard from './ProjectCard';
 import { motion } from 'framer-motion';
+import { Project } from '@/data/personalProjectsData'; // Assuming Project interface is consistent
 
-export default function ProjectList({ projectGroups }) {
+export default function ProjectList({ projectGroups }: { projectGroups: Project[] }) {
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {

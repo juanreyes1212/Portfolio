@@ -3,8 +3,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { Project } from '@/data/personalProjectsData'; // Assuming Project interface is consistent
 
-export default function ProjectDetail({ project }) {
+export default function ProjectDetail({ project }: { project: Project }) {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
