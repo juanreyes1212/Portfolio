@@ -5,6 +5,12 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Project } from '@/data/personalProjectsData'; // Assuming Project interface is consistent
 
+const getBaseRoute = (type: string) => {
+    if (type.includes('work')) return 'work';
+    if (type.includes('personal')) return 'personal';
+    return type;
+};
+
 export default function ProjectDetail({ project }: { project: Project }) {
     return (
         <motion.div
@@ -13,7 +19,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
             transition={{ duration: 0.5, ease: "easeOut" }}
         >
             <div className="mb-8">
-                <Link href={`/${project.type}/`}>
+                <Link href={`/${getBaseRoute(project.type)}/`}>
                     <span className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline group cursor-pointer">
                         <svg className="w-5 h-5 mr-2 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                         Back

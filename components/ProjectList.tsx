@@ -5,6 +5,12 @@ import ProjectCard from './ProjectCard';
 import { motion } from 'framer-motion';
 import { Project } from '@/data/personalProjectsData'; // Assuming Project interface is consistent
 
+const getBaseRoute = (type: string) => {
+    if (type.includes('work')) return 'work';
+    if (type.includes('personal')) return 'personal';
+    return type;
+};
+
 export default function ProjectList({ projectGroups }: { projectGroups: Project[] }) {
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -24,8 +30,7 @@ export default function ProjectList({ projectGroups }: { projectGroups: Project[
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
             {projectGroups.map(group => (
-                // ex: /professional-work/hownd
-                <Link href={`/${group.type}/${group.slug}`} key={group.id} passHref>
+                <Link href={`/${getBaseRoute(group.type)}/${group.slug}`} key={group.id} passHref>
                     <ProjectCard group={group} />
                 </Link>
             ))}
