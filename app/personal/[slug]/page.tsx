@@ -1,3 +1,4 @@
+import { use } from "react"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -8,8 +9,8 @@ import { ArrowLeft, ExternalLink, Github, Heart, Lightbulb, Target } from "lucid
 import { ImageGallery } from "@/components/image-gallery"
 import { getPersonalProject } from "@/lib/projects"
 
-export default function PersonalProjectPage({ params }: { params: { slug: string } }) {
-  const { slug } = params
+export default function PersonalProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params)
   const project = getPersonalProject(slug)
 
   if (!project) {

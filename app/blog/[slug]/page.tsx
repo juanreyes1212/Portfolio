@@ -1,5 +1,6 @@
 "use client"
 
+import { use } from "react"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -11,8 +12,8 @@ import Image from "next/image"
 import { getBlogPost, getAllBlogPosts } from "@/lib/projects"
 import { NewsletterSignup } from "@/components/newsletter-signup"
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const { slug } = params
+export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params)
   const post = getBlogPost(slug)
   const allPosts = getAllBlogPosts()
 

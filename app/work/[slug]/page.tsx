@@ -1,3 +1,4 @@
+import { use } from "react"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -10,11 +11,12 @@ import { getWorkProject } from "@/lib/projects"
 import type { Metadata } from "next"
 
 interface PageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const project = getWorkProject(params.slug)
+  const { slug } = await params
+  const project = getWorkProject(slug)
 
   if (!project) {
     return {
@@ -34,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default function WorkProjectPage({ params }: PageProps) {
-  const { slug } = params
+  const { slug } = use(params)
   const project = getWorkProject(slug)
 
   if (!project) {
