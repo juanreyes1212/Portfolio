@@ -1451,6 +1451,320 @@ Fast feedback loops catch issues early.`,
     tags: ["Testing", "Jest", "Cypress"],
     image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=400&fit=crop",
   },
+  {
+    slug: "fixing-context-test-failures",
+    title: "When Tests Fail Because You Forgot the Provider: A Helmet Story",
+    category: "Testing",
+    excerpt: "Three failing tests, a confusing stack trace, and a one-line fix. Here's how I debugged a test suite that broke because a component expected a context that the test never provided.",
+    content: `Tests don't just fail because of bugs in your code. Sometimes they fail because the test environment doesn't match the environment your code runs in. I ran into this exact scenario while auditing this portfolio's test suite — and the fix was a lesson in React context that's worth sharing.
+
+## The Symptom
+
+The test suite had three failing tests, all in the 404 page:
+
+\`\`\`bash
+FAIL  src/pages/NotFound.test.tsx > NotFound > renders 404 heading
+FAIL  src/pages/NotFound.test.tsx > NotFound > renders page not found message
+FAIL  src/pages/NotFound.test.tsx > NotFound > has Return Home link pointing to /
+
+TypeError: Cannot read properties of undefined (reading 'add')
+  HelmetDispatcher.init node_modules/react-helmet-async/lib/index.esm.js:647:21
+\`\`\`
+
+The stack trace pointed deep into \`react-helmet-async\` — a library I wasn't even thinking about. The error \`Cannot read properties of undefined (reading 'add')\` suggested something was \`null\` or \`undefined\` when it shouldn't be.
+
+## The Root Cause
+
+The 404 page renders a \`<SEO>\` component, which internally renders a \`<Helmet>\` from \`react-helmet-async\`. That library requires a \`<HelmetProvider>\` ancestor in the component tree — it uses React context to collect meta tags across the tree.
+
+The test looked like this:
+
+\`\`\`typescript
+const renderNotFound = () =>
+  render(
+    <MemoryRouter>
+      <NotFound />
+    </MemoryRouter>
+  );
+\`\`\`
+
+No \`HelmetProvider\`. When \`<Helmet>\` tried to register itself with the context, the context was \`undefined\`, and the dispatcher crashed trying to call \`.add()\` on it.
+
+## The Fix
+
+One line — wrap the test render in \`HelmetProvider\`:
+
+\`\`\`typescript
+import { HelmetProvider } from "react-helmet-async";
+
+const renderNotFound = () =>
+  render(
+    <HelmetProvider>
+      <MemoryRouter>
+        <NotFound />
+      </MemoryRouter>
+    </HelmetProvider>
+  );
+\`\`\`
+
+All three tests passed immediately.
+
+## The Broader Lesson
+
+This is a pattern, not a one-off. Any component that depends on a context provider will fail in tests if you don't replicate that provider. The common ones:
+
+- **react-helmet-async** needs \`HelmetProvider\`
+- **react-router-dom** needs \`MemoryRouter\` or \`BrowserRouter\`
+- **@tanstack/react-query** needs \`QueryClientProvider\`
+- **Theme providers** (next-themes, styled-components ThemeProvider) need their wrappers
+
+A good rule: if your \`App.tsx\` wraps everything in providers, your test helper should too. I created a shared test wrapper that mirrors the app's provider stack so every test starts with the right context:
+
+\`\`\`typescript
+const renderWithProviders = (ui: React.ReactElement) =>
+  render(
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          {ui}
+        </MemoryRouter>
+      </QueryClientProvider>
+    </HelmetProvider>
+  );
+\`\`\`
+
+## How to Spot This Class of Bug
+
+The telltale signs:
+
+1. **The stack trace points to a library, not your code** — the error originates inside a provider's internal dispatcher
+2. **"Cannot read properties of undefined"** — a context consumer received no context value
+3. **The component works in the browser but fails in tests** — the browser has the provider (via App.tsx); the test doesn't
+
+When you see all three, check whether the failing component depends on a context provider that your test isn't providing.
+
+## Key Takeaway
+
+Tests should mirror the environment your code runs in. When a component depends on a context provider, the test must provide it — or the test isn't testing the component, it's testing a broken version of it. A single missing wrapper can take down an entire test file, and the error message rarely tells you what's actually missing.`,
+    date: "Jul 31, 2025",
+    readTime: "6 min read",
+    tags: ["Testing", "React", "react-helmet-async"],
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=400&fit=crop",
+  },
+  {
+    slug: "route-splitting-portfolio-bundle",
+    title: "Cutting a 1.3 MB Bundle in Half with Route-Based Code Splitting",
+    category: "Performance",
+    excerpt: "How I took a portfolio site from a single 1.3 MB JavaScript bundle to under 450 KB on first load — using React.lazy, Suspense, and a targeted look at the syntax highlighter.",
+    content: `This portfolio shipped with a single JavaScript bundle of 1,320 KB. After route-based code splitting and a targeted fix for the syntax highlighter, the initial load dropped to 449 KB — a 66% reduction. Here's exactly what I did.
+
+## The Starting Point
+
+\`\`\`bash
+dist/assets/index-CP0YGvB8.js   1,320.50 kB │ gzip: 441.01 kB
+\`\`\`
+
+One file. Every page — home, work, blog, resume, 404 — bundled together. Every visitor downloaded the entire app before seeing anything, even if they only visited the home page.
+
+The Vite build warning made the problem obvious:
+
+\`\`\`
+(!) Some chunks are larger than 500 kB after minification.
+\`\`\`
+
+## Step 1: Lazy-Load Routes
+
+The biggest win came from splitting pages into separate chunks loaded on demand. React's \`lazy()\` and \`Suspense\` make this straightforward:
+
+\`\`\`typescript
+import { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
+import PageSkeleton from "./PageSkeleton";
+
+const Index = lazy(() => import("@/pages/Index"));
+const Work = lazy(() => import("@/pages/Work"));
+const BlogPost = lazy(() => import("@/pages/BlogPost"));
+// ... every page becomes a lazy import
+
+const AnimatedRoutes = () => (
+  <Suspense fallback={<PageSkeleton variant="default" />}>
+    <Routes>
+      <Route path="/" element={<Index />} />
+      <Route path="/blog/:slug" element={<BlogPost />} />
+      {/* ... */}
+    </Routes>
+  </Suspense>
+);
+\`\`\`
+
+Each page now loads only when the visitor navigates to it. The home page ships at 19 KB; the blog post page at 181 KB — but only if you actually open an article.
+
+## Step 2: Fix the Syntax Highlighter
+
+After route splitting, one chunk was still 1.5 MB. The culprit: \`react-syntax-highlighter\` with the full Prism build, which bundles grammar definitions for every language Prism supports — over 200 of them.
+
+The fix was switching from the full \`Prism\` import to \`PrismLight\`, which loads zero languages by default and lets you register only the ones you need:
+
+\`\`\`typescript
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import typescript from "react-syntax-highlighter/dist/esm/languages/prism/typescript";
+import javascript from "react-syntax-highlighter/dist/esm/languages/prism/javascript";
+import json from "react-syntax-highlighter/dist/esm/languages/prism/json";
+import bash from "react-syntax-highlighter/dist/esm/languages/prism/bash";
+import css from "react-syntax-highlighter/dist/esm/languages/prism/css";
+import markup from "react-syntax-highlighter/dist/esm/languages/prism/markup";
+
+SyntaxHighlighter.registerLanguage("typescript", typescript);
+SyntaxHighlighter.registerLanguage("tsx", typescript);
+// ... register only the languages your blog posts actually use
+\`\`\`
+
+Six languages instead of 200+. The BlogPost chunk dropped from 1.5 MB to 181 KB.
+
+## Step 3: Skeleton Fallbacks
+
+A blank screen during lazy loading feels broken. I mapped each route to a matching skeleton variant so the loading state matches the page layout:
+
+\`\`\`typescript
+<Route path="/work" element={<PageTransition skeleton="grid"><Work /></PageTransition>} />
+<Route path="/blog/:slug" element={<PageTransition skeleton="detail"><BlogPost /></PageTransition>} />
+\`\`\`
+
+The skeleton appears instantly, the chunk loads in the background, and the real content swaps in. Perceived performance matters as much as actual performance.
+
+## The Results
+
+| Metric | Before | After |
+|--------|--------|-------|
+| Initial bundle | 1,320 KB | 449 KB |
+| Gzipped initial | 441 KB | 145 KB |
+| BlogPost chunk | (in main) | 181 KB |
+| Home page chunk | (in main) | 19 KB |
+| Chunk size warning | Yes | No |
+
+A visitor who reads the home page and leaves downloads 449 KB instead of 1,320 KB. A visitor who opens a blog post downloads an additional 181 KB — but only if they actually click through.
+
+## When to Split
+
+Not everything benefits from code splitting. The guidelines I follow:
+
+- **Route-level splitting is almost always worth it** — visitors rarely load every page
+- **Heavy, conditionally-used libraries should be lazy-loaded** — syntax highlighters, chart libraries, rich text editors
+- **Small shared components should stay in the main bundle** — splitting a 2 KB component adds overhead with no benefit
+- **Measure before and after** — splitting adds request overhead; confirm it actually helps
+
+## Key Takeaway
+
+Code splitting isn't a single technique — it's a combination of route-level lazy loading, targeted library optimization, and good loading states. The biggest wins often come from the most unexpected places: in this case, a syntax highlighter was quietly bundling 200 languages when the blog only used six.`,
+    date: "Jul 31, 2025",
+    readTime: "8 min read",
+    tags: ["Performance", "Code Splitting", "Vite"],
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
+  },
+  {
+    slug: "reduced-motion-detail-pages",
+    title: "Finishing the Accessibility Audit: Reduced Motion on Every Page",
+    category: "Accessibility",
+    excerpt: "The home page respected prefers-reduced-motion, but the detail pages didn't. Here's how I audited the entire site for motion consistency and fixed the pages that were still animating for everyone.",
+    content: `Accessibility audits often reveal a gap between "we support it on the main pages" and "we support it everywhere." This portfolio had a \`useReducedMotion\` hook used on the home page, the work list, the personal list, and the blog list — but the three detail pages (work project, personal project, blog post) were still animating regardless of the visitor's motion preference. Here's how I found and fixed the inconsistency.
+
+## The Problem
+
+The \`useReducedMotion\` hook listens to the user's OS-level "reduce motion" setting:
+
+\`\`\`typescript
+export const useReducedMotion = () => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+    const handleChange = (event: MediaQueryListEvent) => setPrefersReducedMotion(event.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  return prefersReducedMotion;
+};
+\`\`\`
+
+The list pages used it correctly — when reduced motion was preferred, animations were skipped and content appeared immediately. But the detail pages had hardcoded motion props:
+
+\`\`\`typescript
+// Before — animates regardless of user preference
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.4 }}
+>
+  <BackLink to="/work" label="Back to Work" />
+</motion.div>
+\`\`\`
+
+For someone with vestibular disorders, these uncontrolled animations can cause dizziness, nausea, or headaches. WCAG 2.1 Success Criterion 2.3.3 (Animation from Interactions) requires that motion can be disabled.
+
+## The Fix
+
+I applied the same pattern the list pages already used — a \`fade()\` helper that returns \`{ initial: false }\` when reduced motion is preferred, skipping the animation entirely:
+
+\`\`\`typescript
+const prefersReducedMotion = useReducedMotion();
+
+const fade = (delay = 0) =>
+  prefersReducedMotion
+    ? { initial: false }
+    : {
+        initial: { opacity: 0, y: 20 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.5, delay },
+      };
+
+// After — respects user preference
+<motion.div {...fade(0)}>
+  <BackLink to="/work" label="Back to Work" />
+</motion.div>
+\`\`\`
+
+When \`initial: false\` is passed to Framer Motion, the component renders at its final state with no transition. The content is fully visible immediately.
+
+## The Audit Process
+
+Finding the gap was systematic:
+
+1. **Search for all \`motion.\` usages** — every animated element is a candidate for reduced-motion gating
+2. **Cross-reference with \`useReducedMotion\`** — any file using \`motion.\` without the hook is a gap
+3. **Check shared components** — components like \`FadeInOnScroll\` and \`PageTransition\` already handled it correctly, so only direct \`motion.\` calls in page components needed fixing
+
+The three detail pages (\`WorkProject.tsx\`, \`PersonalProject.tsx\`, \`BlogPost.tsx\`) each had 5-6 \`motion.\` elements with hardcoded animation props. Each one got the same \`fade()\` treatment.
+
+## Why \`initial: false\` Instead of Disabling Motion
+
+Framer Motion's \`initial: false\` tells the component to skip the initial animation and render at the \`animate\` state directly. This is better than:
+
+- **Removing the \`motion.\` component** — would require conditional rendering and break layout
+- **Setting duration to 0** — still triggers a transition, just a very fast one
+- **Using \`animate={{ opacity: 1 }}\` without \`initial\`** — Framer Motion defaults to animating from the current state
+
+\`initial: false\` is the clean, documented way to opt out of entrance animations while keeping the component structure intact.
+
+## The Broader Pattern
+
+This fix illustrates a common accessibility issue: **partial implementation**. A feature exists on some pages but not others, often because:
+
+- Different developers built different pages
+- Pages were added over time and the pattern wasn't enforced
+- Shared components handle it, but page-specific code doesn't
+
+The solution is a consistent pattern applied everywhere motion is used. The \`fade()\` helper — or the existing \`FadeInOnScroll\` component — should be the only way motion is applied. No direct \`motion.\` calls with hardcoded props.
+
+## Key Takeaway
+
+Accessibility isn't a feature you add to some pages — it's a standard you apply everywhere. Audit your entire site for motion usage, ensure every animated element respects \`prefers-reduced-motion\`, and centralize the logic so new pages inherit the behavior automatically. A visitor who needs reduced motion doesn't care that most of your site supports it — the one page that doesn't is the one that will cause them problems.`,
+    date: "Jul 31, 2025",
+    readTime: "7 min read",
+    tags: ["Accessibility", "Reduced Motion", "WCAG"],
+    image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&h=400&fit=crop",
+  },
 ];
 
 // Resume Data

@@ -8,10 +8,21 @@ import MarkdownRenderer from "@/components/MarkdownRenderer";
 import SEO from "@/components/SEO";
 import { blogPosts } from "@/data/portfolioData";
 import { getCategoryColor } from "@/lib/colors";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = blogPosts.find((p) => p.slug === slug);
+  const prefersReducedMotion = useReducedMotion();
+
+  const fade = (delay = 0) =>
+    prefersReducedMotion
+      ? { initial: false }
+      : {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.5, delay },
+        };
 
   if (!post) {
     return <Navigate to="/blog" replace />;
@@ -43,21 +54,12 @@ const BlogPost = () => {
       <main id="main-content" className="pt-32 pb-24 px-6">
         <div className="container mx-auto max-w-4xl">
           {/* Back Link */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-          >
+          <motion.div {...fade(0)}>
             <BackLink to="/blog" label="Back to Blog" />
           </motion.div>
 
           {/* Article Header */}
-          <motion.header
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-8"
-          >
+          <motion.header {...fade(0.1)} className="mb-8">
             <Badge variant="outline" className={`${getCategoryColor(post.category)} mb-4`}>
               {post.category}
             </Badge>
@@ -81,12 +83,7 @@ const BlogPost = () => {
           </motion.header>
 
           {/* Featured Image */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative rounded-2xl overflow-hidden mb-12"
-          >
+          <motion.div {...fade(0.2)} className="relative rounded-2xl overflow-hidden mb-12">
             <img
               src={post.image}
               alt={post.title}
@@ -96,12 +93,7 @@ const BlogPost = () => {
           </motion.div>
 
           {/* Article Content */}
-          <motion.article
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="max-w-none mb-12"
-          >
+          <motion.article {...fade(0.3)} className="max-w-none mb-12">
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
               {post.excerpt}
             </p>
@@ -111,12 +103,7 @@ const BlogPost = () => {
           </motion.article>
 
           {/* Tags */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-wrap gap-2 mb-16"
-          >
+          <motion.div {...fade(0.4)} className="flex flex-wrap gap-2 mb-16">
             {post.tags.map((tag) => (
               <Badge key={tag} variant="secondary" className="text-sm">
                 {tag}
@@ -126,11 +113,7 @@ const BlogPost = () => {
 
           {/* Related Posts */}
           {relatedPosts.length > 0 && (
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
+            <motion.section {...fade(0.5)}>
               <h2 className="text-2xl font-bold mb-6">Related Articles</h2>
               <div className="grid md:grid-cols-2 gap-6">
                 {relatedPosts.map((relatedPost) => (

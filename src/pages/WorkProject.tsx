@@ -6,10 +6,21 @@ import PageLayout from "@/components/portfolio/PageLayout";
 import BackLink from "@/components/portfolio/BackLink";
 import SEO from "@/components/SEO";
 import { workProjects } from "@/data/portfolioData";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const WorkProject = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = workProjects.find((p) => p.slug === slug);
+  const prefersReducedMotion = useReducedMotion();
+
+  const fade = (delay = 0) =>
+    prefersReducedMotion
+      ? { initial: false }
+      : {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.5, delay },
+        };
 
   if (!project) {
     return <Navigate to="/work" replace />;
@@ -30,21 +41,12 @@ const WorkProject = () => {
       <main id="main-content" className="pt-32 pb-24 px-6">
         <div className="container mx-auto max-w-4xl">
           {/* Back Link */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-          >
+          <motion.div {...fade(0)}>
             <BackLink to="/work" label="Back to Work" />
           </motion.div>
 
           {/* Project Header */}
-          <motion.header
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-8"
-          >
+          <motion.header {...fade(0.1)} className="mb-8">
             <div className="flex items-center gap-3 mb-4">
               <Badge variant="outline" className="border-primary/50 text-primary bg-primary/5">
                 {project.company}
@@ -75,12 +77,7 @@ const WorkProject = () => {
           </motion.header>
 
           {/* Featured Image */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative rounded-2xl overflow-hidden mb-12"
-          >
+          <motion.div {...fade(0.2)} className="relative rounded-2xl overflow-hidden mb-12">
             <img
               src={project.image}
               alt={project.title}
@@ -90,12 +87,7 @@ const WorkProject = () => {
           </motion.div>
 
           {/* Project Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="space-y-8 mb-12"
-          >
+          <motion.div {...fade(0.3)} className="space-y-8 mb-12">
             <div className="glass rounded-2xl p-8">
               <h2 className="text-2xl font-bold mb-4">Overview</h2>
               <p className="text-foreground/90 leading-relaxed text-lg">
@@ -141,11 +133,7 @@ const WorkProject = () => {
 
           {/* Related Projects */}
           {relatedProjects.length > 0 && (
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
+            <motion.section {...fade(0.4)}>
               <h2 className="text-2xl font-bold mb-6">More Projects</h2>
               <div className="grid md:grid-cols-2 gap-6">
                 {relatedProjects.map((relatedProject) => (

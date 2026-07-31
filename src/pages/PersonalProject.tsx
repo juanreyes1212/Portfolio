@@ -8,10 +8,21 @@ import BackLink from "@/components/portfolio/BackLink";
 import SEO from "@/components/SEO";
 import { personalProjects } from "@/data/portfolioData";
 import { getStatusColor } from "@/lib/colors";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const PersonalProject = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = personalProjects.find((p) => p.slug === slug);
+  const prefersReducedMotion = useReducedMotion();
+
+  const fade = (delay = 0) =>
+    prefersReducedMotion
+      ? { initial: false }
+      : {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.5, delay },
+        };
 
   if (!project) {
     return <Navigate to="/personal" replace />;
@@ -32,21 +43,12 @@ const PersonalProject = () => {
       <main id="main-content" className="pt-32 pb-24 px-6">
         <div className="container mx-auto max-w-4xl">
           {/* Back Link */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-          >
+          <motion.div {...fade(0)}>
             <BackLink to="/personal" label="Back to Personal Projects" />
           </motion.div>
 
           {/* Project Header */}
-          <motion.header
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-8"
-          >
+          <motion.header {...fade(0.1)} className="mb-8">
             <Badge variant="outline" className={`${getStatusColor(project.status)} mb-4`}>
               {project.status}
             </Badge>
@@ -67,12 +69,7 @@ const PersonalProject = () => {
           </motion.header>
 
           {/* Featured Image */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative rounded-2xl overflow-hidden mb-12"
-          >
+          <motion.div {...fade(0.2)} className="relative rounded-2xl overflow-hidden mb-12">
             <img
               src={project.image}
               alt={project.title}
@@ -82,12 +79,7 @@ const PersonalProject = () => {
           </motion.div>
 
           {/* Project Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="space-y-8 mb-12"
-          >
+          <motion.div {...fade(0.3)} className="space-y-8 mb-12">
             <div className="glass rounded-2xl p-8">
               <h2 className="text-2xl font-bold mb-4">About This Project</h2>
               <p className="text-foreground/90 leading-relaxed text-lg">
@@ -134,11 +126,7 @@ const PersonalProject = () => {
 
           {/* Related Projects */}
           {relatedProjects.length > 0 && (
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
+            <motion.section {...fade(0.4)}>
               <h2 className="text-2xl font-bold mb-6">More Projects</h2>
               <div className="grid md:grid-cols-2 gap-6">
                 {relatedProjects.map((relatedProject) => (

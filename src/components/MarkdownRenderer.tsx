@@ -1,13 +1,33 @@
-import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { lazy, Suspense, useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import typescript from "react-syntax-highlighter/dist/esm/languages/prism/typescript";
+import javascript from "react-syntax-highlighter/dist/esm/languages/prism/javascript";
+import json from "react-syntax-highlighter/dist/esm/languages/prism/json";
+import bash from "react-syntax-highlighter/dist/esm/languages/prism/bash";
+import css from "react-syntax-highlighter/dist/esm/languages/prism/css";
+import markup from "react-syntax-highlighter/dist/esm/languages/prism/markup";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+SyntaxHighlighter.registerLanguage("typescript", typescript);
+SyntaxHighlighter.registerLanguage("tsx", typescript);
+SyntaxHighlighter.registerLanguage("ts", typescript);
+SyntaxHighlighter.registerLanguage("javascript", javascript);
+SyntaxHighlighter.registerLanguage("js", javascript);
+SyntaxHighlighter.registerLanguage("jsx", javascript);
+SyntaxHighlighter.registerLanguage("json", json);
+SyntaxHighlighter.registerLanguage("bash", bash);
+SyntaxHighlighter.registerLanguage("shell", bash);
+SyntaxHighlighter.registerLanguage("css", css);
+SyntaxHighlighter.registerLanguage("html", markup);
+SyntaxHighlighter.registerLanguage("markup", markup);
 
 interface MarkdownRendererProps {
   content: string;
   className?: string;
 }
 
-const MarkdownRenderer = ({ content, className = '' }: MarkdownRendererProps) => {
+const MarkdownRenderer = ({ content, className = "" }: MarkdownRendererProps) => {
   return (
     <div className={className}>
       <ReactMarkdown
@@ -59,10 +79,10 @@ const MarkdownRenderer = ({ content, className = '' }: MarkdownRendererProps) =>
         em: ({ children }) => (
           <em className="italic text-foreground/90">{children}</em>
         ),
-        code: ({ className, children, ...props }) => {
-          const match = /language-(\w+)/.exec(className || '');
+        code: ({ className: codeClassName, children, ...props }) => {
+          const match = /language-(\w+)/.exec(codeClassName || "");
           const isInline = !match;
-          
+
           if (isInline) {
             return (
               <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-primary" {...props}>
@@ -70,20 +90,20 @@ const MarkdownRenderer = ({ content, className = '' }: MarkdownRendererProps) =>
               </code>
             );
           }
-          
+
           return (
             <SyntaxHighlighter
-              style={oneDark}
               language={match[1]}
+              style={oneDark}
               PreTag="div"
               className="rounded-lg my-4 !bg-card border border-border"
               customStyle={{
-                margin: '1rem 0',
-                padding: '1rem',
-                borderRadius: '0.5rem',
+                margin: "1rem 0",
+                padding: "1rem",
+                borderRadius: "0.5rem",
               }}
             >
-              {String(children).replace(/\n$/, '')}
+              {String(children).replace(/\n$/, "")}
             </SyntaxHighlighter>
           );
         },

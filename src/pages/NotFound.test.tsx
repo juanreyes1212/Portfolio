@@ -1,13 +1,16 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import NotFound from "./NotFound";
 
 const renderNotFound = () =>
   render(
-    <MemoryRouter>
-      <NotFound />
-    </MemoryRouter>
+    <HelmetProvider>
+      <MemoryRouter>
+        <NotFound />
+      </MemoryRouter>
+    </HelmetProvider>
   );
 
 describe("NotFound", () => {
