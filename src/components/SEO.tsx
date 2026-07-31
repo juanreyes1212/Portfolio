@@ -14,7 +14,7 @@ const SITE_NAME = "Juan Reyes Portfolio";
 const DEFAULT_TITLE = "Juan Reyes | Senior Frontend Developer";
 const DEFAULT_DESCRIPTION =
   "Senior Frontend Developer with 7+ years experience building enterprise-scale React and Vue.js applications. Expert in design systems, performance optimization, and technical leadership.";
-const BASE_URL = "https://juanreyes.dev";
+const BASE_URL = "https://jdrey.dev";
 const DEFAULT_OG_IMAGE = "https://images.pexels.com/photos/4218883/pexels-photo-4218883.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop";
 
 const SEO = ({

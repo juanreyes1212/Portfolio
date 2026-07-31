@@ -191,7 +191,7 @@ const SEO = ({ title, description, canonical, ogImage, ogType = "website", jsonL
     <Helmet>
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
-      <link rel="canonical" href={\`https://juanreyes.dev\${canonical}\`} />
+      <link rel="canonical" href={\`https://jdrey.dev\${canonical}\`} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       {jsonLd && (
@@ -218,7 +218,7 @@ JSON-LD (JavaScript Object Notation for Linked Data) is Google's preferred forma
   "@type": "Person",
   "name": "Juan Reyes",
   "jobTitle": "Senior Frontend Developer",
-  "url": "https://juanreyes.dev",
+  "url": "https://jdrey.dev",
   "knowsAbout": ["React.js", "Vue.js", "TypeScript"]
 }
 \`\`\`
@@ -247,7 +247,7 @@ This enables rich snippets in search results — showing the author, date, and d
 Without canonical tags, Google might index \`/blog/my-post\`, \`/blog/my-post?\`, and \`/blog/my-post#section\` as separate pages. Always set a canonical URL:
 
 \`\`\`html
-<link rel="canonical" href="https://juanreyes.dev/blog/my-post" />
+<link rel="canonical" href="https://jdrey.dev/blog/my-post" />
 \`\`\`
 
 ### 2. Open Graph Tags Are Not Optional

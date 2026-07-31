@@ -48,7 +48,7 @@ const BlogPost = () => {
           image: post.image,
           datePublished: post.date,
           author: { "@type": "Person", name: "Juan Reyes" },
-          url: `https://juanreyes.dev/blog/${post.slug}`,
+          url: `https://jdrey.dev/blog/${post.slug}`,
         }}
       />
       <main id="main-content" className="pt-32 pb-24 px-6">

@@ -1,162 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://juanreyes.dev/</loc>
+    <loc>https://jdrey.dev/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/work</loc>
+    <loc>https://jdrey.dev/work</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/personal</loc>
+    <loc>https://jdrey.dev/personal</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog</loc>
+    <loc>https://jdrey.dev/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/resume</loc>
+    <loc>https://jdrey.dev/resume</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/work/petsmart-ecommerce</loc>
+    <loc>https://jdrey.dev/work/petsmart-ecommerce</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/work/hownd-dashboard</loc>
+    <loc>https://jdrey.dev/work/hownd-dashboard</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/work/design-system</loc>
+    <loc>https://jdrey.dev/work/design-system</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/work/retail-pos</loc>
+    <loc>https://jdrey.dev/work/retail-pos</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/personal/spotley-wifi</loc>
+    <loc>https://jdrey.dev/personal/spotley-wifi</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/personal/portfolio-v2</loc>
+    <loc>https://jdrey.dev/personal/portfolio-v2</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/personal/code-snippets</loc>
+    <loc>https://jdrey.dev/personal/code-snippets</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/personal/budget-tracker</loc>
+    <loc>https://jdrey.dev/personal/budget-tracker</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/react-helmet-json-ld-seo</loc>
+    <loc>https://jdrey.dev/blog/react-helmet-json-ld-seo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/tdd-legacy-react</loc>
+    <loc>https://jdrey.dev/blog/tdd-legacy-react</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/yagni-codebase-pruning</loc>
+    <loc>https://jdrey.dev/blog/yagni-codebase-pruning</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/axe-core-accessibility-audit</loc>
+    <loc>https://jdrey.dev/blog/axe-core-accessibility-audit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/six-month-enterprise-contract</loc>
+    <loc>https://jdrey.dev/blog/six-month-enterprise-contract</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/three-month-contract-healthtech</loc>
+    <loc>https://jdrey.dev/blog/three-month-contract-healthtech</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/wcag-certification-journey</loc>
+    <loc>https://jdrey.dev/blog/wcag-certification-journey</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/continuous-learning-practice</loc>
+    <loc>https://jdrey.dev/blog/continuous-learning-practice</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/scalable-design-systems</loc>
+    <loc>https://jdrey.dev/blog/scalable-design-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/react-performance-optimization</loc>
+    <loc>https://jdrey.dev/blog/react-performance-optimization</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/leading-frontend-teams</loc>
+    <loc>https://jdrey.dev/blog/leading-frontend-teams</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/typescript-best-practices</loc>
+    <loc>https://jdrey.dev/blog/typescript-best-practices</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/accessibility-frontend</loc>
+    <loc>https://jdrey.dev/blog/accessibility-frontend</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/vue-to-react-migration</loc>
+    <loc>https://jdrey.dev/blog/vue-to-react-migration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/state-management-2024</loc>
+    <loc>https://jdrey.dev/blog/state-management-2024</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/testing-strategies-frontend</loc>
+    <loc>https://jdrey.dev/blog/testing-strategies-frontend</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/fixing-context-test-failures</loc>
+    <loc>https://jdrey.dev/blog/fixing-context-test-failures</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/route-splitting-portfolio-bundle</loc>
+    <loc>https://jdrey.dev/blog/route-splitting-portfolio-bundle</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://juanreyes.dev/blog/reduced-motion-detail-pages</loc>
+    <loc>https://jdrey.dev/blog/reduced-motion-detail-pages</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

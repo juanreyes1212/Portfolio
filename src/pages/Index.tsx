@@ -17,7 +17,7 @@ const Index = () => {
           "@type": "Person",
           name: "Juan Reyes",
           jobTitle: "Senior Frontend Developer",
-          url: "https://juanreyes.dev",
+          url: "https://jdrey.dev",
           email: "reyes1212@gmail.com",
           telephone: "+1-480-435-2155",
           address: { "@type": "PostalAddress", addressLocality: "Mesa", addressRegion: "AZ", addressCountry: "US" },

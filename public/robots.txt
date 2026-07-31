@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://juanreyes.dev/sitemap.xml
+Sitemap: https://jdrey.dev/sitemap.xml

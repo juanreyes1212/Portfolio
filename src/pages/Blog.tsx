@@ -65,7 +65,7 @@ const Blog = () => {
           "@context": "https://schema.org",
           "@type": "Blog",
           name: "Juan Reyes Blog",
-          url: "https://juanreyes.dev/blog",
+          url: "https://jdrey.dev/blog",
           author: { "@type": "Person", name: "Juan Reyes" },
         }}
       />
