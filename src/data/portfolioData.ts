@@ -1765,6 +1765,115 @@ Accessibility isn't a feature you add to some pages — it's a standard you appl
     tags: ["Accessibility", "Reduced Motion", "WCAG"],
     image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&h=400&fit=crop",
   },
+  {
+    slug: "dependency-security-update",
+    title: "Auditing and Patching Vulnerable Dependencies Across the Stack",
+    category: "Security",
+    excerpt: "A walkthrough of the security audit I ran on this portfolio — identifying vulnerable packages, navigating conflicting advisories, and upgrading react-router from v6 to v7 without breaking the app.",
+    content: `Dependencies are the supply chain of modern web development. Every \`npm install\` pulls in hundreds of transitive packages, and any one of them can carry a vulnerability. Here's how I audited this portfolio's dependency tree and patched every issue I could.
+
+## The Audit
+
+I started with \`npm audit\`, which checks every package in the lockfile against the Node Security Platform database. The report flagged 12 dependencies with known CVEs:
+
+- **picomatch** — ReDoS and incorrect glob matching (high)
+- **postcss** — multiple high-severity vulnerabilities
+- **esbuild** — moderate severity
+- **vite** — high and moderate CVEs
+- **js-yaml** — high severity
+- **glob** — high severity
+- **react-router** — moderate open redirect and SSR hydration issues
+- **@remix-run/router** — high severity
+- **minimatch** — multiple high-severity CVEs
+- **rollup** — high severity
+- **flatted** — high severity
+- **yaml** — moderate severity
+- **brace-expansion** — multiple high-severity CVEs
+
+Some of these are direct dependencies. Most are transitive — packages that my dependencies depend on. You can't fix what you can't see, so the first step is always running the audit and reading the full report.
+
+## The Easy Fixes
+
+Most of the vulnerabilities were in transitive dependencies that \`npm audit fix\` could patch automatically. Running it updated 40 packages across the tree:
+
+\`\`\`bash
+npm audit fix
+\`\`\`
+
+This bumped picomatch, postcss, esbuild, vite, js-yaml, glob, minimatch, rollup, flatted, yaml, and brace-expansion to their patched versions. One command, most of the work done.
+
+But \`npm audit fix\` isn't magic — it can't resolve every situation.
+
+## The Tricky One: react-router
+
+The remaining advisories all pointed at react-router. The installed version was 6.30.4, and the advisory covered 6.0.0 through 7.17.0 — meaning no 6.x patch existed. The fix required upgrading to 7.18.0+.
+
+That's a major version jump. React Router 7 changed the package structure and some APIs. Before committing to the upgrade, I needed to know what the app actually used:
+
+\`\`\`bash
+grep -r "from \\"react-router-dom\\"" src/
+\`\`\`
+
+The results showed the app uses \`BrowserRouter\`, \`Routes\`, \`Route\`, \`Link\`, \`NavLink\`, \`useLocation\`, \`useParams\`, and \`Navigate\`. These are all stable APIs that survived the v6-to-v7 transition unchanged. The migration was safe.
+
+I updated \`package.json\` to pin react-router-dom at 7.18.2:
+
+\`\`\`json
+"react-router-dom": "7.18.2"
+\`\`\`
+
+Then did a clean install to ensure the lockfile resolved correctly:
+
+\`\`\`bash
+rm -rf node_modules package-lock.json
+npm install
+\`\`\`
+
+## When Advisories Conflict
+
+After the upgrade, \`npm audit\` still reported two high-severity advisories. But here's the catch: the "fix" npm suggested was to **downgrade** react-router-dom back to 7.11.0 — which would re-introduce the moderate-severity open redirect and SSR hydration vulnerabilities I'd just fixed.
+
+This is a circular advisory: no single version satisfies both overlapping security reports. The remaining advisory (GHSA-qwww-vcr4-c8h2) describes a CSRF bypass that only affects **React Server Components (RSC) mode** — a server-side rendering feature this app doesn't use. It's a client-side SPA with no server actions.
+
+In this situation, the right call is to stay on 7.18.2. It fixes the moderate issues that could actually affect the app, and the remaining advisory doesn't apply to the app's architecture. Blindly following \`npm audit fix --force\` would have made things worse.
+
+## Verifying the Upgrade
+
+A dependency upgrade is only done when the app still works. I ran three checks:
+
+1. **Build** — \`npm run build\` completed successfully with no errors
+2. **Tests** — all 12 existing tests passed, including router-dependent tests for navigation and 404 handling
+3. **Manual review** — confirmed that \`BrowserRouter\`, \`MemoryRouter\` (used in tests), and all routing components behaved identically
+
+## Lessons
+
+### Run \`npm audit\` regularly
+New CVEs are published constantly. A clean audit today doesn't mean a clean audit tomorrow. Make it part of your routine.
+
+### Read past the summary
+\`npm audit\` tells you what's vulnerable and what version fixes it, but it doesn't tell you whether the vulnerability applies to your app. The react-router CSRF advisory is real — but only for RSC mode. Understanding the vulnerability matters as much as knowing it exists.
+
+### \`npm audit fix --force\` can make things worse
+The \`--force\` flag ignores semver constraints and can downgrade packages to satisfy one advisory while reintroducing another. Always read what it plans to do before running it.
+
+### Major version upgrades are sometimes unavoidable
+When a vulnerability spans an entire major version range, you can't avoid the upgrade. Assess the API surface you actually use, check the migration guide, and test thoroughly.
+
+## The Final State
+
+After the audit:
+
+- 11 transitive dependencies patched via \`npm audit fix\`
+- react-router-dom upgraded from 6.30.4 to 7.18.2
+- Build passes, all 12 tests pass
+- One advisory remains, but it doesn't apply to this app's architecture
+
+Dependency security is ongoing maintenance, not a one-time fix. The next CVE is always around the corner — the best you can do is stay informed, patch promptly, and understand what you're patching.`,
+    date: "Aug 5, 2025",
+    readTime: "9 min read",
+    tags: ["Security", "Dependencies", "React Router"],
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c388a3?w=800&h=400&fit=crop",
+  },
 ];
 
 // Resume Data
